@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hacktivgram</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      color: #222;
+    }
+
+    .page {
+      width: 760px;
+      margin: 36px auto 60px;
+    }
+
+    .header {
+      margin-bottom: 24px;
+    }
+
+    .title {
+      margin: 0 0 12px;
+      font-size: 58px;
+      color: #f37021;
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+
+    .welcome {
+      margin: 0 0 18px;
+      font-size: 18px;
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+
+    .nav-link {
+      color: #f37021;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .nav-link:hover {
+      text-decoration: underline;
+    }
+
+    .search-form {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .search-input {
+      flex: 1;
+      padding: 12px 14px;
+      border: 1px solid #cfcfcf;
+      border-radius: 8px;
+      font-size: 15px;
+      background: #fff;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: #f37021;
+    }
+
+    .search-btn {
+      padding: 12px 18px;
+      background: #f37021;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .search-btn:hover {
+      background: #d85f12;
+    }
+
+    .message {
+      padding: 12px 14px;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      font-size: 14px;
+    }
+
+    .success {
+      background: #fff1e7;
+      color: #d85f12;
+      border: 1px solid #ffd2b2;
+    }
+
+    .error {
+      background: #ffe6e6;
+      color: #c62828;
+      border: 1px solid #ffbdbd;
+    }
+
+    .post-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 22px;
+      margin-bottom: 18px;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.06);
+    }
+
+    .user-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .avatar {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #f37021;
+    }
+
+    .avatar-fallback {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #fff1e7;
+      color: #f37021;
+      font-weight: bold;
+      border: 2px solid #f37021;
+      font-size: 18px;
+    }
+
+    .user-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .posted-by {
+      margin: 0;
+      font-size: 13px;
+      color: #777;
+    }
+
+    .username {
+      margin: 0;
+      font-size: 17px;
+      font-weight: bold;
+    }
+
+    .post-title {
+      margin: 0 0 10px;
+      font-size: 32px;
+      color: #111;
+      line-height: 1.2;
+    }
+
+    .post-content {
+      margin: 0 0 14px;
+      line-height: 1.6;
+      color: #333;
+      font-size: 15px;
+    }
+
+    .post-img {
+      width: 100%;
+      max-height: 520px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin: 12px 0 14px;
+      display: block;
+    }
+
+    .meta-line {
+      margin: 8px 0;
+      color: #555;
+      font-size: 14px;
+    }
+
+    .tag-list {
+      margin: 12px 0 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: #fff1e7;
+      color: #f37021;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .action-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .btn-link {
+      display: inline-block;
+      padding: 10px 14px;
+      border-radius: 8px;
+      background: #f37021;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .btn-link:hover {
+      background: #d85f12;
+    }
+
+    .btn-outline {
+      background: #fff;
+      color: #f37021;
+      border: 1px solid #f37021;
+    }
+
+    .btn-outline:hover {
+      background: #fff1e7;
+    }
+
+    .divider {
+      margin-top: 26px;
+      border: none;
+      border-top: 1px solid #e8e8e8;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="header">
+      <h1 class="title">Hacktivgram</h1>
+
+      <p class="welcome">Welcome, <strong><%= username %></strong></p>
+
+      <div class="top-actions">
+        <a class="nav-link" href="/posts/add">Create Post</a>
+        <a class="nav-link" href="/logout">Logout</a>
+      </div>
+
+      <form class="search-form" method="GET" action="/posts">
+        <input
+          class="search-input"
+          type="text"
+          name="search"
+          placeholder="Search title or hashtag..."
+          value="<%= search %>"
+        >
+        <button class="search-btn" type="submit">Search</button>
+      </form>
+
+      <% if (msg) { %>
+        <div class="message success"><%= msg %></div>
+      <% } %>
+
+      <% if (error) { %>
+        <div class="message error"><%= error %></div>
+      <% } %>
+    </div>
+
+    <% posts.forEach(post => { %>
+      <div class="post-card" id="post-<%= post.id %>">
+
+        <div class="user-row">
+          <% if (post.User && post.User.Profile && post.User.Profile.displayAvatar) { %>
+            <img
+              class="avatar"
+              src="<%= post.User.Profile.displayAvatar %>"
+              width="50"
+              height="50"
+              alt="avatar"
+            >
+          <% } else { %>
+            <div class="avatar-fallback">
+              <%= post.User && post.User.username ? post.User.username[0].toUpperCase() : 'U' %>
+            </div>
+          <% } %>
+
+          <div class="user-meta">
+            <p class="posted-by">Posted by:</p>
+            <p class="username">
+              <%= post.User ? (post.User.username || post.User.email) : 'Unknown' %>
+            </p>
+            <% if (post.User && post.User.Profile && post.User.Profile.bio) { %>
+              <%= post.User.Profile.bio %>
+              <% } %>
+          </div>
+        </div>
+
+        <h3 class="post-title"><%= post.title %></h3>
+
+        <p class="post-content"><%= post.content %></p>
+
+        <% if (post.imgUrl) { %>
+          <img class="post-img" src="<%= post.imgUrl %>" width="250" alt="post image">
+        <% } %>
+
+        <p class="meta-line">📍 Location: <%= post.city %>, <%= post.country %></p>
+
+        <p class="meta-line">❤️ Likes: <%= post.getLikeCount() %></p>
+
+        <p class="meta-line">💬 Comments: <%= post.Comments ? post.Comments.length : 0 %></p>
+
+        <% if (post.Tags && post.Tags.length) { %>
+          <div class="tag-list">
+            <% post.Tags.forEach(tag => { %>
+              <span class="tag"><%= tag.name %></span>
+            <% }) %>
+          </div>
+        <% } %>
+
+        <%
+          let isLiked = false
+          if (post.Likes) {
+            for (let like of post.Likes) {
+              if (like.userId === userId) {
+                isLiked = true
+              }
+            }
+          }
+        %>
+
+        <div class="action-row">
+          <% if (isLiked) { %>
+            <a class="btn-link" href="/posts/<%= post.id %>/unlike">Unlike</a>
+          <% } else { %>
+            <a class="btn-link" href="/posts/<%= post.id %>/like">Like</a>
+          <% } %>
+
+          <a class="btn-link btn-outline" href="/posts/<%= post.id %>">Detail</a>
+
+          <% if (post.userId === userId) { %>
+            <a class="btn-link btn-outline" href="/posts/<%= post.id %>/edit">Edit</a>
+          <% } %>
+
+          <% if (post.userId === userId || role === 'admin') { %>
+            <a class="btn-link btn-outline" href="/posts/<%= post.id %>/delete">Delete</a>
+          <% } %>
+        </div>
+
+        <hr class="divider">
+      </div>
+    <% }) %>
+  </div>
+</body>
+</html>

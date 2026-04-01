@@ -2,7 +2,7 @@
   "development": {
     "username": "postgres",
     "password": "postgres",
-    "database": "hacktivgram",
+    "database": "db_hacktivgram",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },

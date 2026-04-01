@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hacktivgram - Add Post</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .card {
+      width: 520px;
+      background: white;
+      padding: 32px 28px;
+      border-radius: 14px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    }
+
+    h1 {
+      margin: 0 0 24px;
+      text-align: center;
+      color: #f37021;
+      font-size: 38px;
+    }
+
+    .message {
+      margin-bottom: 14px;
+      font-size: 14px;
+      color: #d93025;
+    }
+
+    p {
+      margin: 10px 0 6px;
+      font-weight: bold;
+      font-size: 14px;
+      color: #444;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 15px;
+      outline: none;
+      margin-bottom: 12px;
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: #f37021;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      background: #f37021;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #d85f12;
+    }
+
+    .back-link {
+      display: block;
+      text-align: center;
+      margin-top: 16px;
+      text-decoration: none;
+      color: #f37021;
+      font-weight: bold;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Create Post</h1>
+
+    <% if (error) { %>
+      <p class="message"><%= error %></p>
+    <% } %>
+
+    <form method="POST" action="/posts/add">
+      <p>Title</p>
+      <input type="text" name="title">
+
+      <p>Content</p>
+      <textarea name="content"></textarea>
+
+      <p>Image URL</p>
+      <input type="text" name="imgUrl">
+
+      <p>Hashtags</p>
+      <input type="text" name="hashtags" placeholder="#coding #healing #daily">
+
+      <button type="submit">Create</button>
+    </form>
+
+    <a class="back-link" href="/posts">← Back</a>
+  </div>
+</body>
+</html>

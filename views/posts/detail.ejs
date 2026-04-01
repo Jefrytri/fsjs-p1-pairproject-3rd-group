@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Detail Post</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      color: #222;
+    }
+
+    .page {
+      width: 760px;
+      margin: 36px auto 60px;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 18px;
+      color: #f37021;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 15px;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.06);
+    }
+
+    .user-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .avatar {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #f37021;
+    }
+
+    .avatar-fallback {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #fff1e7;
+      color: #f37021;
+      border: 2px solid #f37021;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .posted-by {
+      margin: 0;
+      font-size: 13px;
+      color: #777;
+    }
+
+    .username {
+      margin: 4px 0 0;
+      font-size: 17px;
+      font-weight: bold;
+    }
+
+    .post-title {
+      margin: 8px 0 12px;
+      font-size: 34px;
+      color: #f37021;
+      line-height: 1.2;
+    }
+
+    .post-content {
+      margin: 0 0 16px;
+      line-height: 1.6;
+      font-size: 15px;
+      color: #333;
+    }
+
+    .post-img {
+      width: 100%;
+      max-width: 100%;
+      max-height: 520px;
+      object-fit: cover;
+      border-radius: 12px;
+      display: block;
+      margin: 12px 0 16px;
+    }
+
+    .meta-line {
+      margin: 8px 0;
+      color: #555;
+      font-size: 14px;
+    }
+
+    .btn-row {
+      margin: 16px 0 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .btn-link {
+      display: inline-block;
+      padding: 10px 14px;
+      border-radius: 8px;
+      background: #f37021;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .btn-link:hover {
+      background: #d85f12;
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 14px 0 8px;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: #fff1e7;
+      color: #f37021;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid #e8e8e8;
+      margin: 22px 0;
+    }
+
+    .section-title {
+      margin: 0 0 14px;
+      color: #f37021;
+      font-size: 24px;
+    }
+
+    .comment-card {
+      padding: 14px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .comment-user {
+      margin: 0 0 6px;
+      font-weight: bold;
+      font-size: 15px;
+    }
+
+    .comment-content {
+      margin: 0 0 8px;
+      color: #333;
+      line-height: 1.5;
+    }
+
+    .comment-delete {
+      color: #f37021;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .comment-delete:hover {
+      text-decoration: underline;
+    }
+
+    .empty-comment {
+      color: #666;
+      font-size: 14px;
+    }
+
+    .comment-form {
+      margin-top: 18px;
+    }
+
+    .comment-input {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 15px;
+      outline: none;
+      margin-bottom: 12px;
+    }
+
+    .comment-input:focus {
+      border-color: #f37021;
+    }
+
+    .comment-btn {
+      padding: 12px 18px;
+      border: none;
+      border-radius: 8px;
+      background: #f37021;
+      color: white;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .comment-btn:hover {
+      background: #d85f12;
+    }
+
+    .qr-box {
+  margin: 20px 0;
+  padding: 16px;
+  background: #fff8f3;
+  border: 1px solid #ffd9bf;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.qr-title {
+  margin: 0 0 12px;
+  color: #f37021;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.qr-image {
+  width: 160px;
+  height: 160px;
+  object-fit: contain;
+  background: white;
+  padding: 8px;
+  border-radius: 10px;
+  border: 1px solid #eee;
+}
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <a class="back-link" href="/posts">← Back</a>
+
+    <div class="card">
+
+      <h1 class="section-title">Detail Post</h1>
+
+      <div class="user-row">
+        <% if (post.User && post.User.Profile && post.User.Profile.displayAvatar) { %>
+          <img class="avatar" src="<%= post.User.Profile.displayAvatar %>" width="50" height="50">
+        <% } else { %>
+          <span class="avatar-fallback">No Avatar</span>
+        <% } %>
+
+        <div>
+          <p class="posted-by">Posted by:</p>
+          <p class="username">
+            <strong>
+              <%= post.User ? (post.User.username || post.User.email) : 'Unknown' %>
+            </strong>
+          </p>
+          <% if (post.User && post.User.Profile && post.User.Profile.bio) { %>
+              <%= post.User.Profile.bio %>
+              <% } %>
+        </div>
+      </div>
+
+      <h2 class="post-title"><%= post.title %></h2>
+
+      <p class="post-content"><%= post.content %></p>
+
+      <% if (post.imgUrl) { %>
+        <img class="post-img" src="<%= post.imgUrl %>" width="300">
+      <% } %>
+
+      <p class="meta-line">📍 Location: <%= post.city %>, <%= post.country %></p>
+
+      <p class="meta-line">❤️ Likes: <%= post.getLikeCount() %></p>
+
+      <%
+        let isLiked = false
+        if (post.Likes) {
+          for (let like of post.Likes) {
+            if (like.userId === userId) {
+              isLiked = true
+            }
+          }
+        }
+      %>
+
+      <div class="btn-row">
+        <% if (isLiked) { %>
+          <a class="btn-link" href="/posts/<%= post.id %>/unlike">Unlike</a>
+        <% } else { %>
+          <a class="btn-link" href="/posts/<%= post.id %>/like">Like</a>
+        <% } %>
+      </div>
+
+      <% if (qrCode) { %>
+        <div class="qr-box">
+        <p class="qr-title">QR Code Post</p>
+        <img class="qr-image" src="<%= qrCode %>" alt="QR Code Post">
+        </div>
+      <% } %>
+      
+      <hr class="divider">
+
+      <% if (post.Tags && post.Tags.length) { %>
+        <div class="tag-list">
+          <% post.Tags.forEach(tag => { %>
+            <span class="tag"><%= tag.name %></span>
+          <% }) %>
+        </div>
+      <% } %>
+
+      <hr class="divider">
+
+      <h3 class="section-title">Comments</h3>
+
+      <% if (post.Comments && post.Comments.length) { %>
+        <% post.Comments.forEach(comment => { %>
+          <div class="comment-card">
+            <strong class="comment-user">
+              <%= comment.User ? (comment.User.username || comment.User.email) : 'Unknown' %>
+            </strong>
+            <p class="comment-content"><%= comment.content %></p>
+
+            <% if (comment.userId === userId || role === 'admin') { %>
+              <a class="comment-delete" href="/posts/comments/<%= comment.id %>/delete">Delete</a>
+            <% } %>
+          </div>
+        <% }) %>
+      <% } else { %>
+        <p class="empty-comment">No comments yet</p>
+      <% } %>
+
+      <form class="comment-form" method="POST" action="/posts/<%= post.id %>/comments">
+        <input class="comment-input" type="text" name="content" placeholder="Write comment..." required>
+        <button class="comment-btn" type="submit">Add Comment</button>
+      </form>
+
+    </div>
+  </div>
+</body>
+</html>

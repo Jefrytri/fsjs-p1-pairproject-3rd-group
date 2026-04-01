@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .card {
+      width: 420px;
+      background: white;
+      padding: 36px 32px;
+      border-radius: 14px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    }
+
+    h1 {
+      margin: 0 0 28px;
+      text-align: center;
+      color: #f37021;
+      font-size: 48px;
+    }
+
+    .message {
+      margin-bottom: 14px;
+      font-size: 14px;
+      color: #d93025;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1px solid #cfcfcf;
+      border-radius: 8px;
+      font-size: 16px;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: #f37021;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      background: #f37021;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #d85f12;
+    }
+
+    .footer-link {
+      margin-top: 18px;
+      text-align: center;
+      font-size: 15px;
+    }
+
+    .footer-link a {
+      color: #f37021;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .footer-link a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Register</h1>
+
+    <% if (error) { %>
+      <p class="message"><%= error %></p>
+    <% } %>
+
+    <form action="/register" method="post">
+      <input type="text" name="username" placeholder="username">
+      <input type="email" name="email" placeholder="email">
+      <input type="password" name="password" placeholder="password">
+      <input type="text" name="bio" placeholder="bio">
+      <input type="text" name="avatarUrl" placeholder="avatar url">
+      <button type="submit">Register</button>
+    </form>
+
+    <div class="footer-link">
+      Sudah punya akun?
+      <a href="/login">Login</a>
+    </div>
+  </div>
+</body>
+</html>

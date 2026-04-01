@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hacktivgram - Edit Post</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .card {
+      width: 500px;
+      background: white;
+      padding: 32px 28px;
+      border-radius: 14px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    }
+
+    h1 {
+      margin: 0 0 24px;
+      text-align: center;
+      color: #f37021;
+      font-size: 36px;
+    }
+
+    p {
+      margin: 10px 0 6px;
+      font-weight: bold;
+      font-size: 14px;
+      color: #444;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 15px;
+      outline: none;
+      margin-bottom: 12px;
+    }
+
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: #f37021;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      background: #f37021;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #d85f12;
+    }
+
+    .back-link {
+      display: block;
+      text-align: center;
+      margin-top: 16px;
+      text-decoration: none;
+      color: #f37021;
+      font-weight: bold;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="card">
+    <h1>Edit Post</h1>
+
+    <form method="POST" action="/posts/<%= post.id %>/edit">
+
+      <p>Title</p>
+      <input type="text" name="title" value="<%= post.title %>">
+
+      <p>Content</p>
+      <textarea name="content"><%= post.content %></textarea>
+
+      <p>Image URL</p>
+      <input type="text" name="imgUrl" value="<%= post.imgUrl %>">
+
+      <p>Hashtags</p>
+      <input type="text" name="hashtags" value="<%= hashtags %>">
+
+      <button type="submit">Update</button>
+    </form>
+
+    <a class="back-link" href="/posts">← Back</a>
+  </div>
+
+</body>
+</html>
