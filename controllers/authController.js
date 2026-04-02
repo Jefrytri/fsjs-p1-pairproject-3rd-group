@@ -13,44 +13,43 @@ class AuthController {
   }
 
   static async register(req, res, next) {
+  try {
+    const { username, email, password, status, avatarUrl } = req.body
+
+    const user = await User.create({
+      username,
+      email,
+      password,
+      role: 'user'
+    })
+
+    await Profile.create({
+      status,
+      avatarUrl,
+      userId: user.id
+    })
+
     try {
-      const { username, email, password, bio, avatarUrl } = req.body
-
-      const user = await User.create({
-        username,
-        email,
-        password,
-        role: 'user'
-      })
-
-      await Profile.create({
-        bio,
-        avatarUrl,
-        userId: user.id
-      })
-
-      try {
-        await sendWelcomeEmail(user.email, user.username)
-      } catch (emailError) {
-        console.log('Email skipped:', emailError.message)
-      }
-
-      res.redirect('/login?success=Register success, please login')
-    } catch (error) {
-      let msg = 'Register failed'
-
-      if (
-        error.name === 'SequelizeValidationError' ||
-        error.name === 'SequelizeUniqueConstraintError'
-      ) {
-        msg = error.errors.map(el => el.message).join(', ')
-      } else if (error.message) {
-        msg = error.message
-      }
-
-      res.redirect(`/register?error=${encodeURIComponent(msg)}`)
+      await sendWelcomeEmail(user.email, user.username)
+    } catch (emailError) {
+      console.log('Email skipped:', emailError.message)
     }
+
+    res.redirect('/login?success=Register success, please login')
+  } catch (error) {
+
+ 
+    let errors = []
+
+    if (error.name === "SequelizeValidationError") {
+      errors = error.errors.map(el => el.message)
+    } else {
+      errors = [error.message]
+    }
+
+    res.redirect(`/register?error=${errors.join(',')}`)
   }
+}
 
   static showLogin(req, res) {
     const { error, success } = req.query
@@ -58,43 +57,41 @@ class AuthController {
   }
 
   static async login(req, res, next) {
-    try {
-      const { email, password } = req.body
+  try {
+    const { email, password } = req.body
 
-      const user = await User.findOne({
-        where: { email }
-      })
+    const user = await User.findOne({
+      where: { email }
+    })
 
-      if (!user) {
-        throw new Error('Invalid email or password')
-      }
-
-      const isValid = comparePassword(password, user.password)
-
-      if (!isValid) {
-        throw new Error('Invalid email or password')
-      }
-
-      req.session.userId = user.id
-      req.session.username = user.username || user.email
-      req.session.role = user.role
-
-      res.redirect('/posts')
-    } catch (error) {
-      let msg = 'Login failed'
-
-      if (
-        error.name === 'SequelizeValidationError' ||
-        error.name === 'SequelizeUniqueConstraintError'
-      ) {
-        msg = error.errors.map(el => el.message).join(', ')
-      } else if (error.message) {
-        msg = error.message
-      }
-
-      res.redirect(`/login?error=${encodeURIComponent(msg)}`)
+    if (!user) {
+      throw new Error('Invalid email or password')
     }
+
+    const isValid = comparePassword(password, user.password)
+
+    if (!isValid) {
+      throw new Error('Invalid email or password')
+    }
+
+    req.session.userId = user.id
+    req.session.username = user.username || user.email
+    req.session.role = user.role
+
+    res.redirect('/posts')
+  } catch (error) {
+
+    let errors = []
+
+    if (error.name === "SequelizeValidationError") {
+      errors = error.errors.map(el => el.message)
+    } else {
+      errors = [error.message]
+    }
+
+    res.redirect(`/login?error=${errors.join(',')}`)
   }
+}
 
   static logout(req, res) {
     req.session.destroy(() => {

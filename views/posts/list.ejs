@@ -306,8 +306,8 @@
             <p class="username">
               <%= post.User ? (post.User.username || post.User.email) : 'Unknown' %>
             </p>
-            <% if (post.User && post.User.Profile && post.User.Profile.bio) { %>
-              <%= post.User.Profile.bio %>
+            <% if (post.User && post.User.Profile && post.User.Profile.status) { %>
+              <%= post.User.Profile.status %>
               <% } %>
           </div>
         </div>

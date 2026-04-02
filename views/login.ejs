@@ -105,7 +105,11 @@
     <h1>Login</h1>
 
     <% if (error) { %>
-      <p class="message error"><%= error %></p>
+    <ul class="message error">
+    <% error.split(',').forEach(el => { %>
+    <li><%= el %></li>
+    <% }) %>
+    </ul>
     <% } %>
 
     <% if (success) { %>
@@ -113,8 +117,8 @@
     <% } %>
 
     <form action="/login" method="post">
-      <input type="email" name="email" placeholder="Email" required>
-      <input type="password" name="password" placeholder="Password" required>
+      <input type="text" name="email" placeholder="Email" >
+      <input type="password" name="password" placeholder="Password" >
       <button type="submit">Login</button>
     </form>
 

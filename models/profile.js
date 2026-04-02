@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Profile.init({
-    bio: {
+    status: {
       type: DataTypes.TEXT
     },
     avatarUrl: {
